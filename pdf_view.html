@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<script>
+    window.onload = function () {
+        isMobile();
+    }
+    function isMobile() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                document.write('<div id="check_mobile_timer" class="container">非常抱歉，时间太赶了，我的pdf还没做移动端兼容，您可以在pc端查看<br/>十分感谢您能阅读我的简历(*^__^*) ...</div>' +
+                        '将在<span id = "timer" style="color: red">10' +
+                        '</span>秒后跳转回简历页<br>' +
+                        '<a href="http://xxlufei.github.io" style="text-decoration: none; color: dodgerblue">立即跳转</a>');
+
+            }
+        }
+    }
+
+    let check_mobile_timer = setInterval(function () {
+        if ($('#check_mobile_timer').text().length > 0) {
+            clearInterval(check_mobile_timer);
+            begin_timer();
+            $('#timer').text(9);
+            return;
+        }
+        isMobile();
+    }, 1000);
+
+    function begin_timer() {
+        let i = 9;
+        setInterval(function () {
+            i--;
+            if (i == 0) {
+                window.location.href = "http://xxlufei.github.io";
+                return;
+            }
+            $('#timer').text(i);
+        }, 1000);
+    }
+
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>正在发布-总后台应用文档</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.media.js"></script>
+</head>
+<style type="text/css">
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+</style>
+<body>
+<div id="div" class="col-lg-12"></div>
+<a class="media" href="file/zzfb.pdf"></a>
+<script type="text/javascript">
+    $(function () {
+        $('a.media').media({width: $('#div').width(), height: $(window).height()});
+    });
+</script>
+</body>
+</html>
